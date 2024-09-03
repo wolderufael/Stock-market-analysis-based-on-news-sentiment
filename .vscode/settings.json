@@ -1,0 +1,12 @@
+{
+  "python.pythonPath": ".venv/Scripts/python.exe",
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true
+  },
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": false,
+  "python.analysis.extraPaths": ["./src"]
+}
