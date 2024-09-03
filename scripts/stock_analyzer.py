@@ -39,23 +39,6 @@ class StockAnalyzer:
         data.loc[:,'MACD_Signal'] = macd_signal
         # Add more indicators as needed
         return data
-
-    def plot_stock_data(self, data):
-        fig = px.line(data, x=data.index, y=['Close', 'SMA'], title='Stock Price with Moving Average')
-        fig.show()
-
-    def plot_rsi(self, data):
-        fig = px.line(data, x=data.index, y='RSI', title='Relative Strength Index (RSI)')
-        fig.show()
-
-    def plot_ema(self, data):
-        fig = px.line(data, x=data.index, y=['Close', 'EMA'], title='Stock Price with Exponential Moving Average')
-        fig.show()
-
-    def plot_macd(self, data):
-        fig = px.line(data, x=data.index, y=['MACD', 'MACD_Signal'], title='Moving Average Convergence Divergence (MACD)')
-        fig.show()
-    
    
     def plot_technical_indicators(self,data):
         fig, axs = plt.subplots(4, 1, figsize=(14, 12), sharex=True)
@@ -90,10 +73,12 @@ class StockAnalyzer:
         for ax in axs:
             ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
             ax.xaxis.set_major_locator(mdates.MonthLocator())
+            # ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
             ax.set_xlabel('Date')
             ax.set_ylabel('Value')
             ax.grid(True)
 
+        plt.xticks(rotation=90)
         plt.tight_layout(rect=[0, 0, 1, 0.96])
         plt.show()
 
