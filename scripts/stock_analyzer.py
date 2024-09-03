@@ -82,8 +82,6 @@ class StockAnalyzer:
         plt.tight_layout(rect=[0, 0, 1, 0.96])
         plt.show()
 
-
-    
     def calculate_portfolio_weights(self, tickers, start_date, end_date):
         data = yf.download(tickers, start=start_date, end=end_date)['Close']
         mu = expected_returns.mean_historical_return(data)
