@@ -3,6 +3,8 @@ import talib as ta
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt import risk_models
 from pypfopt import expected_returns
@@ -53,6 +55,49 @@ class StockAnalyzer:
     def plot_macd(self, data):
         fig = px.line(data, x=data.index, y=['MACD', 'MACD_Signal'], title='Moving Average Convergence Divergence (MACD)')
         fig.show()
+    
+   
+    def plot_technical_indicators(self,data):
+        fig, axs = plt.subplots(4, 1, figsize=(14, 12), sharex=True)
+        fig.suptitle('Stock Analysis with Technical Indicators', fontsize=16)
+
+        # Plot stock price and SMA
+        axs[0].plot(data.index, data['Close'], label='Close', color='blue')
+        axs[0].plot(data.index, data['SMA'], label='SMA', color='orange')
+        axs[0].set_title('Stock Price and SMA')
+        axs[0].legend(loc='upper left')
+
+        # Plot RSI
+        axs[1].plot(data.index, data['RSI'], label='RSI', color='green')
+        axs[1].axhline(70, color='red', linestyle='--', label='Overbought')
+        axs[1].axhline(30, color='blue', linestyle='--', label='Oversold')
+        axs[1].set_title('Relative Strength Index (RSI)')
+        axs[1].legend(loc='upper left')
+
+        # Plot EMA
+        axs[2].plot(data.index, data['Close'], label='Close', color='blue')
+        axs[2].plot(data.index, data['EMA'], label='EMA', color='red')
+        axs[2].set_title('Stock Price and EMA')
+        axs[2].legend(loc='upper left')
+
+        # Plot MACD
+        axs[3].plot(data.index, data['MACD'], label='MACD', color='purple')
+        axs[3].plot(data.index, data['MACD_Signal'], label='MACD Signal', color='orange')
+        axs[3].set_title('Moving Average Convergence Divergence (MACD)')
+        axs[3].legend(loc='upper left')
+
+        # Formatting
+        for ax in axs:
+            ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+            ax.xaxis.set_major_locator(mdates.MonthLocator())
+            ax.set_xlabel('Date')
+            ax.set_ylabel('Value')
+            ax.grid(True)
+
+        plt.tight_layout(rect=[0, 0, 1, 0.96])
+        plt.show()
+
+
     
     def calculate_portfolio_weights(self, tickers, start_date, end_date):
         data = yf.download(tickers, start=start_date, end=end_date)['Close']
