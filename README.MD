@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 # Stock Market Analysis Based on News Sentiment
 This repository contains a project that analyzes the stock market based on news sentiment. The goal is to explore the relationship between news sentiment and stock prices using various data analysis techniques.
 ## Project Overview
